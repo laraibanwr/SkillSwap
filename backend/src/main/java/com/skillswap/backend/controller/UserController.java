@@ -32,4 +32,36 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
+
+    // GET /api/users/offering?skill=java
+    @GetMapping("/offering")
+    public ResponseEntity<List<User>> getUsersOfferingSkill(@RequestParam String skill) {
+        return ResponseEntity.ok(userService.getUsersOfferingSkill(skill));
+    }
+
+    // GET /api/users/wanting?skill=java
+    @GetMapping("/wanting")
+    public ResponseEntity<List<User>> getUsersWantingSkill(@RequestParam String skill) {
+        return ResponseEntity.ok(userService.getUsersWantingSkill(skill));
+    }
+
+    // GET /api/users/matches?userId=1
+    @GetMapping("/matches")
+    public ResponseEntity<List<User>> getMutualMatches(@RequestParam Long userId) {
+        return ResponseEntity.ok(userService.getMutualMatches(userId));
+    }
+
+    // PUT /api/users/{id} - Update user
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+        return ResponseEntity.ok(userService.updateUser(id, user));
+    }
+
+    // DELETE /api/users/{id} - Delete user
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

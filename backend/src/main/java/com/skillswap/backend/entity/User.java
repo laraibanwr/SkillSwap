@@ -22,9 +22,14 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    private String password;
+
     @ElementCollection
     private List<String> skillOffered;
 
     @ElementCollection
     private List<String> skillWanted;
+
+    private String role; // e.g., "USER", "ADMIN"
+
 }
