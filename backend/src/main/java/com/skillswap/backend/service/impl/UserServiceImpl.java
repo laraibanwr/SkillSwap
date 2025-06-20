@@ -64,4 +64,46 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+    }
+
+    @Override
+    public List<User> searchUsersByName(String name) {
+        return userRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    @Override
+    public void addFavorite(Long userId, Long favoriteUserId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found: " + userId));
+        User favoriteUser = userRepository.findById(favoriteUserId)
+                .orElseThrow(() -> new RuntimeException("Favorite user not found: " + favoriteUserId));
+
+        if (!user.getFavoriteUsers().contains(favoriteUser)) {
+            user.getFavoriteUsers().add(favoriteUser);
+            userRepository.save(user);
+        }
+    }
+
+    @Override
+    public void removeFavorite(Long userId, Long favoriteUserId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found: " + userId));
+        User favoriteUser = userRepository.findById(favoriteUserId)
+                .orElseThrow(() -> new RuntimeException("Favorite user not found: " + favoriteUserId));
+
+        user.getFavoriteUsers().remove(favoriteUser);
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getFavorites(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found: " + userId));
+        return user.getFavoriteUsers();
+    }
+
 }

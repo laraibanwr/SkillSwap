@@ -12,4 +12,10 @@ public interface UserService {
     List<User> getMutualMatches(Long userId);
     User updateUser(Long id, User updatedUser);
     void deleteUser(Long id);
+    User getUserById(Long id);
+    List<User> searchUsersByName(String name);
+    void addFavorite(Long userId, Long favoriteUserId);
+    void removeFavorite(Long userId, Long favoriteUserId);
+    List<User> getFavorites(Long userId);
+
 }

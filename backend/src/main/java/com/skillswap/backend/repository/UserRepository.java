@@ -26,4 +26,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "AND EXISTS (SELECT 1 FROM User u3 JOIN u3.skillOffered o WHERE u3.id = :userId AND LOWER(wanted) IN (LOWER(o)))")
     List<User> findMutualMatches(Long userId);
 
+    List<User> findByNameContainingIgnoreCase(String name);
+
 }
