@@ -1,7 +1,7 @@
 package com.skillswap.backend.controller;
 
 import com.skillswap.backend.entity.User;
-import com.skillswap.backend.service.UserService;
+import com.skillswap.backend.service.user.UserService;
 import com.skillswap.backend.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -89,7 +89,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/favorites/{favoriteId}")
     public ResponseEntity<Void> addFavorite(@PathVariable Long favoriteId) {
-        Long userId = AuthUtil.getCurrentUserId();  // ✅ Extracted from token
+        Long userId = AuthUtil.getCurrentUserId();  // Extracted from token
         userService.addFavorite(userId, favoriteId);
         return ResponseEntity.ok().build();
     }

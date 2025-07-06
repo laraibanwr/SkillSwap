@@ -1,4 +1,4 @@
-package com.skillswap.backend.service;
+package com.skillswap.backend.service.user;
 
 import com.skillswap.backend.entity.User;
 

@@ -1,8 +1,7 @@
-package com.skillswap.backend.service.impl;
+package com.skillswap.backend.service.user;
 
 import com.skillswap.backend.entity.User;
 import com.skillswap.backend.repository.UserRepository;
-import com.skillswap.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
